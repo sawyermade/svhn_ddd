@@ -1,7 +1,8 @@
 #-*- coding: utf-8 -*-
-import cv2
+import cv2, os, sys
 import numpy as np
 import keras.models
+import tqdm
 
 import digit_detector.region_proposal as rp
 import digit_detector.show as show
@@ -17,7 +18,9 @@ mean_value_for_detector = 107.524
 mean_value_for_recognizer = 112.833
 
 model_input_shape = (32,32,1)
-DIR = '../datasets/svhn/train'
+DIR = 'data/train'
+
+os.environ["CUDA_VISIBLE_DEVICES"]=sys.argv[1]
 
 if __name__ == "__main__":
     # 1. image files
@@ -31,15 +34,10 @@ if __name__ == "__main__":
     
     digit_spotter = detector.DigitSpotter(char_detector, char_recognizer, rp.MserRegionProposer())
     
-    for img_file in img_files[0:]:
+    for img_file in tqdm.tqdm(img_files[0:]):
         # 2. image
         img = cv2.imread(img_file)
         
-        digit_spotter.run(img, threshold=0.5, do_nms=True, nms_threshold=0.1)
+        digit_spotter.run(img, threshold=0.5, do_nms=True, nms_threshold=0.1, show_result=True)
 
-
-
-
-
-
-
+        # if count % 1000 == 0: print "Detected %d" % count

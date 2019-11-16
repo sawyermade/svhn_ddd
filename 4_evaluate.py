@@ -3,7 +3,7 @@
 # Todo : keras model 에서 predict_probs() 할 때 message off 하는 방법
 # evaluator.run(img_files, do_nms=False) 에서 do_nms option 을 사용하지 않도록 detector 자체의 class 에서 nms 객체를 갖고 있도록 하자.
 
-import cv2
+import cv2, os, sys
 import numpy as np
 
 import digit_detector.region_proposal as rp
@@ -17,14 +17,15 @@ import digit_detector.classify as cls
 
 model_filename = "detector_model.hdf5"
 model_input_shape = (32,32,1)
-DIR = '../datasets/svhn/train'
-ANNOTATION_FILE = "../datasets/svhn/train/digitStruct.json"
+DIR = 'data/train'
+ANNOTATION_FILE = "annotation/train/digitStruct.json"
 
 detect_model = "detector_model.hdf5"
 recognize_model = "recognize_model.hdf5"
 mean_value_for_detector = 107.524
 mean_value_for_recognizer = 112.833
 
+os.environ["CUDA_VISIBLE_DEVICES"]=sys.argv[1]
 
 if __name__ == "__main__":
     # 1. load test image files, annotation file

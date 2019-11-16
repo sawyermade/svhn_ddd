@@ -1,17 +1,19 @@
 import digit_detector.file_io as file_io
 import numpy as np
-import os
+import os, sys
 import cv2
 
 import digit_detector.preprocess as preproc
 import digit_detector.train as train_
 
-DIR = '../datasets/svhn'
+DIR = 'data'
 NB_FILTERS = 32
 NB_EPOCH = 5
 
 DETECTOR_FILE = 'detector_model.hdf5'
 RECOGNIZER_FILE = 'recognize_model.hdf5'
+
+os.environ["CUDA_VISIBLE_DEVICES"]=sys.argv[1]
 
 if __name__ == "__main__":
 
