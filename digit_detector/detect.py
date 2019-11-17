@@ -125,7 +125,7 @@ class DigitSpotter:
                 msg = "{0}".format(y_pred[i])
                 cv2.putText(image, msg, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), thickness=2)
                 
-            cv2.imshow("MSER + CNN", image)
+            cv2.imshow("MSER + CNN", cv2.resize(image, (1280, 720)))
             cv2.waitKey(0)
         
         return bbs, probs
