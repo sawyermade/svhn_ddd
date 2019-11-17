@@ -1,5 +1,6 @@
 name: digit_detector
 channels:
+- menpo
 - anaconda
 - defaults
 dependencies:
@@ -51,6 +52,7 @@ dependencies:
 # - zlib=1.2.8=3
 # - opencv=2.4.11=nppy27_0
 - opencv=2
+- harfbuzz
 - pip:
   - funcsigs==1.0.2
   - h5py==2.7.0
